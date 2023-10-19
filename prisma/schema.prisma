@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  
 }
 
 datasource db {
@@ -23,8 +24,8 @@ content String @default("[]")
 visits Int @default(0)
 submission Int @default(0)
 
-shareURL String @default(uuid())
-submissions FormSubmissions[]
+shareURL String @default(uuid()) @unique
+FormSubmissions FormSubmissions[]
 
 @@unique([name, userId])
 }
