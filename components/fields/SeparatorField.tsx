@@ -1,26 +1,7 @@
 "use client";
 
-import {
-  ElementsType,
-  FormElement,
-  FormElementInstance,
-  SubmitFunction,
-} from "../form-elements";
+import { ElementsType, FormElement } from "../form-elements";
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
-import useDesigner from "../hooks/useDesigner";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
 import { RiSeparator } from "react-icons/ri";
 import { Separator } from "../ui/separator";
 
@@ -46,11 +27,7 @@ export const SeparatorFieldFormElement: FormElement = {
   validate: () => true,
 };
 
-function DesignerComponent({
-  elementInstance,
-}: {
-  elementInstance: FormElementInstance;
-}) {
+function DesignerComponent() {
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label className="text-muted-foreground">
@@ -61,18 +38,10 @@ function DesignerComponent({
   );
 }
 
-function FormComponent({
-  elementInstance,
-}: {
-  elementInstance: FormElementInstance;
-}) {
+function FormComponent() {
   return <Separator />;
 }
 
-function PropertiesComponent({
-  elementInstance,
-}: {
-  elementInstance: FormElementInstance;
-}) {
+function PropertiesComponent() {
   return <p>No properties for this element</p>;
 }

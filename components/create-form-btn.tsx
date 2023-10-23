@@ -11,7 +11,6 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { BsFileEarmarkPlus } from "react-icons/bs";

@@ -1,6 +1,5 @@
 "use client";
 
-import { MdTextAreaFields } from "react-icons/md";
 import {
   ElementsType,
   FormElement,
@@ -23,7 +22,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
 import { BsTextareaResize } from "react-icons/bs";
 import { Textarea } from "../ui/textarea";
