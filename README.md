@@ -1,49 +1,238 @@
 # Form Builder
 
-Um criador de formulários onde é possível compartilhar o formulário com outras pessoas e acompanhar as respostas de cada um.
+Uma aplicação web para criação, publicação e gerenciamento de formulários personalizados.
 
-## 🚀 Começando
+O **Form Builder** permite criar formulários visualmente, compartilhar formulários através de links públicos e acompanhar as respostas enviadas pelos usuários.
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de teste.
+## 🚀 Demo
 
-### 📋 Pré-requisitos
+**[Acessar aplicação](https://form-builder-mocha.vercel.app/)**
 
-Clone o repositório
+## ✨ Funcionalidades
+
+- 🔐 Autenticação e gerenciamento de usuários
+- 📝 Criação e edição de formulários
+- 🎨 Editor visual para construção dos formulários
+- 🧩 Diferentes tipos de campos
+- ↕️ Organização dos elementos através de drag and drop
+- 👁️ Visualização e preenchimento dos formulários publicados
+- 🔗 Geração de link público para compartilhamento
+- 📊 Acompanhamento das respostas recebidas
+- 📈 Contagem de visitas e submissões
+- ✅ Validação dos dados dos formulários
+- 💾 Persistência dos formulários e respostas em banco de dados
+
+## 🧩 Tipos de campos
+
+O builder possui diferentes elementos para construção dos formulários:
+
+- Texto
+- Número
+- Área de texto
+- Checkbox
+- Select
+- Data
+- Título
+- Subtítulo
+- Parágrafo
+- Separador
+- Espaçamento
+
+## 🛠️ Tecnologias
+
+### Frontend
+
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
+- [dnd-kit](https://dndkit.com/)
+
+### Backend & Database
+
+- Next.js
+- Prisma ORM
+- PostgreSQL
+
+### Autenticação
+
+- Clerk
+
+## 🏗️ Arquitetura
+
+O projeto utiliza a estrutura **App Router** do Next.js, separando as principais responsabilidades da aplicação entre páginas, componentes, hooks, schemas e camada de persistência.
+
+```text
+form-builder/
+├── app/
+│   ├── (auth)/
+│   ├── (dashboard)/
+│   │   ├── builder/
+│   │   └── forms/
+│   ├── submit/
+│   └── context/
+│
+├── components/
+│   ├── fields/
+│   ├── hooks/
+│   ├── providers/
+│   ├── ui/
+│   └── ...
+│
+├── lib/
+├── prisma/
+├── public/
+├── schemas/
+├── middleware.ts
+└── package.json
+```
+
+A aplicação possui áreas distintas para autenticação, dashboard, construção dos formulários, gerenciamento das respostas e preenchimento público dos formulários.
+
+## 🔄 Fluxo da aplicação
+
+O fluxo principal pode ser resumido em:
 
 ```
-git clone git@github.com:jefersonPMatos/form-builder.git
+Autenticação
+     ↓
+Dashboard
+     ↓
+Criar formulário
+     ↓
+Builder visual
+     ↓
+Publicar formulário
+     ↓
+Gerar link público
+     ↓
+Compartilhar
+     ↓
+Receber respostas
+     ↓
+Acompanhar submissões
 ```
 
-### 🔧 Instalação
+Cada formulário possui uma URL pública própria, permitindo que usuários externos preencham e enviem suas respostas.
 
-Instale as dependências:
+## 🗄️ Persistência
+
+Os dados são armazenados em PostgreSQL utilizando Prisma.
+
+O modelo principal `Form` mantém informações como:
+
+- Nome e descrição
+- Usuário responsável
+- Conteúdo do formulário
+- Status de publicação
+- URL pública
+- Quantidade de visitas
+- Quantidade de submissões
+- Data de criação
+
+As respostas são armazenadas separadamente e relacionadas ao formulário correspondente através do modelo `FormSubmissions`.
+
+## 💻 Executando localmente
+
+### Pré-requisitos
+
+- Node.js
+- PostgreSQL
+- npm ou Yarn
+
+### 1. Clone o projeto
+
+```bash
+git clone https://github.com/jefersonpmatos/form-builder.git
+
+cd form-builder
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+```
+
+ou:
+
+```bash
+yarn
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_publishable_key"
+CLERK_SECRET_KEY="your_secret_key"
+```
+
+### 4. Configure o banco de dados
+
+Execute as migrations do Prisma:
+
+```bash
+npx prisma migrate dev
+```
+
+### 5. Execute o projeto
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em:
 
 ```
-npm install ou yarn add
+http://localhost:3000
 ```
 
-Rode o projeto:
+## 📦 Scripts
 
-```
-npm run dev ou yarn dev
-```
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera o build de produção |
+| `npm run start` | Inicia a aplicação em produção |
+| `npm run lint` | Executa o ESLint |
 
-### ⚡ Tecnologias
+## 🎯 Objetivo do projeto
 
-* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-* ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
-* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-* ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-* ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
-* ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-* ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+O projeto foi desenvolvido como um exercício prático de construção de uma aplicação completa utilizando o ecossistema React/Next.js.
 
+Além da interface de criação de formulários, o projeto envolve autenticação, persistência de dados, relacionamentos no banco, validação, rotas protegidas, geração de URLs públicas e gerenciamento de submissões.
 
+## 🚧 Status
 
+**Beta**
 
-## 📌 Versão
+O projeto ainda está em evolução e pode receber novas funcionalidades e melhorias.
 
-Versão Beta. 
+## 🔮 Possíveis melhorias
+
+- [ ] Mais tipos de campos
+- [ ] Melhorias na experiência de edição
+- [ ] Personalização visual dos formulários
+- [ ] Exportação das respostas
+- [ ] Mais opções de visualização das submissões
+- [ ] Melhorias de acessibilidade
+- [ ] Testes automatizados
+- [ ] Melhorias de performance
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Jeferson P. Matos**.
+
+GitHub: [@jefersonpmatos](https://github.com/jefersonpmatos)
+Projeto: [form-builder](https://github.com/jefersonpmatos/form-builder)
 
 ---
-⌨️ com ❤️ por [Jeferson P. Matos]([https://gist.github.com/lohhan](https://github.com/jefersonPMatos)https://github.com/jefersonPMatos) 
+
+⭐ Se este projeto foi útil ou interessante, considere deixar uma estrela no repositório.
